@@ -19,7 +19,7 @@ int main() {
 
 
 
-    I.showIlha();
+
 
 
 
@@ -27,13 +27,13 @@ int main() {
         cout << "1 - Contratar Worker. (oper/len/miner)" << endl;
         cout << "2 - Mover Worker." << endl;
         cout << "3 - Listar Zona." << endl;
-        cout << "4 - Construir Edificio. (mnC/mnF/bat/fun/serra/barg)" << endl;
+        cout << "4 - Construir Edificio. (mnC/mnF/bat/fun/serra/barg/elec)" << endl;
         cout << "5 - New Day." << endl;
         cout << "6 - Produzir." << endl;
         cout << "7 - Ligar Edificio." << endl;
         cout << "8 - Desligar Edificio." << endl;
         cout << "9 - Vender Recursos." << endl;
-        cout << "10 - Evoluir Edificio." << endl;
+        cout << "10 - Evoluir Edificio.  (barg/mnC/mnF/bat)" << endl;
         cout << "11 - Vender Edificio." << endl;
         cout << ">>  ";
         scanf("%d",&option);
