@@ -12,6 +12,7 @@
 class CentralEletrica : public Edificio{
 
     int carvaoProd = 0;
+    bool deal = false;
 public:
     CentralEletrica(int day) : Edificio("elec",0,100/*kg de carvao*/,day){}
 
@@ -29,6 +30,10 @@ public:
 
     void removeCarvaoProd(const int cost) {
         carvaoProd = carvaoProd - cost;
+    }
+
+    bool getDealState() const{
+        return deal;
     }
 };
 
