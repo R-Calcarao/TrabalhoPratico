@@ -13,6 +13,7 @@ class MinaCarvao : public Edificio{
      float ProbCollap = 10;
      int carvaoProd = 0;
      float productSize=2;
+    bool deal = false;
 public:
     MinaCarvao(int day) : Edificio("mnC",10/*e uma viga*/,100/*de Carvao*/,day){}
 
@@ -40,6 +41,10 @@ public:
 
     void addProductSize(){
         productSize++;
+    }
+
+    bool getDealState() const{
+        return deal;
     }
 
 };
