@@ -8,9 +8,10 @@
 #include "Pastagem.h"
 #include "Montanha.h"
 #include "Pantano.h"
-#include "ZonaX.h"
+#include "Favela.h"
 #include <cstdlib>
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -18,12 +19,20 @@ using namespace std;
 
 Ilha::Ilha(const int l, const int c) : linhas(l), colunas(c) {
     recursos = new Recursos();
-
     srand(time(0));
+    /*random_device dev;
+    mt19937 rng(dev());
+    uniform_int_distribution<std::mt19937::result_type> dist6(1,6);*/ // distribution in range [1, 6]
+
+
+   // dist6(rng)
+
+
 
     for(int i=0; i<linhas; i++) {
         vector<Zona* > v1;
         for(int j=0; j<colunas; j++) {
+
             int f = (rand() % 6) + 1;
             switch (f) {
                 case 1:
@@ -47,8 +56,9 @@ Ilha::Ilha(const int l, const int c) : linhas(l), colunas(c) {
                     break;
 
                 case 6:
-                    v1.push_back(new ZonaX(i,j));//Composição -> Zonas fazem parte da ilha
+                    v1.push_back(new Favela(i,j));//Composição -> Zonas fazem parte da ilha
                     break;
+
             }
         }
         ilhaBi.push_back(v1);
