@@ -7,19 +7,50 @@
 
 void Barragem::newDay() {
     Edificio::newDay();
+    bool TrueFalse;
+    if (getZonaRef()->getDay() - getConstrucDay() >= 8) {
+        TrueFalse = (rand() % 100) < ProbCollap;
+        if (TrueFalse) {
 
-    if(getZonaRef()->getDay() - getConstrucDay() >= 8) {
-        bool TrueFalse = (rand() % 100) < ProbCollap;
-        if(TrueFalse){
-            cout << "O edificio " << getTipo() << " desabou devido as cheias na Zona " << getZonaRef()->getTipoZona() << endl;
+            cout << "O edificio " << getTipo() << " desabou devido as cheias na Zona " << getZonaRef()->getTipoZona()
+                 << endl;
             getZonaRef()->removeEdificio();
-        } else if(getZonaRef()->getDay() - getConstrucDay() >= 10 && getZonaRef()->getTipoZona() == "pnt") {
-                cout << "O edificio " << getTipo() << " afundou na Zona " << getZonaRef()->getTipoZona() << endl;
-                getZonaRef()->removeEdificio();
-                getZonaRef()->fireAllWorkers();
+
+        } else if (getZonaRef()->getDay() - getConstrucDay() >= 10 && getZonaRef()->getTipoZona() == "pnt") {
+
+            cout << "O edificio " << getTipo() << " afundou na Zona " << getZonaRef()->getTipoZona() << endl;
+            getZonaRef()->removeEdificio();
+            getZonaRef()->fireAllWorkers();
+
         }
     }
-}
+
+    if (getZonaRef()->getTipoZona() == "fav" && !getDealState()){
+        TrueFalse = (rand() % 100) < 20;
+        if (getEletrProd() <= getZonaRef()->getEletr() && getEletrProd() != 0) {
+            getZonaRef()->withdrawEletr(getEletrProd());
+            cout << "A Barragem foi assaltada na Zona " << getZonaRef()->getTipoZona() << endl;
+            cout << "Prejuizo de " << getEletrProd() << " KWh de Eletricidade" << endl;
+            removeEletrProd(getEletrProd());//Esvaziar o armazem
+            cout << endl;
+            cout << "A Mafia da Zona proposeram-lhe uma parceria de lavagem de dinheiro..." << endl;
+            cout << "Embora seja extremamente lucrativa, ha uma grande chance de ser apanhado pelas autoridades!" << endl;
+            cout << "Deseja aceitar?(S/N): ";
+            char aux;
+            cin >> aux;
+            if (aux == 'S') {
+                cout << "Parceria realizada, boa sorte!" << endl;
+                deal = true;
+            } else {
+                cout << "Parceria negada." << endl;
+            }
+        } else {
+            cout << "Houve uma tentativa de assalto na Barragem na Zona " << getZonaRef()->getTipoZona() << endl;
+        }
+      }
+    }
+
+
 
 void Barragem::produzir() {
     Edificio::produzir();
@@ -34,9 +65,33 @@ void Barragem::produzir() {
     && getZonaRef()->HavebatAround()) {
 
         if(getZonaRef()->getTipoZona() == "mnt") {
+
             getZonaRef()->addEletrc(getProductSize()*2);
-        } else {
+            addEletrProd(getProductSize()*2);
+
+        } else if(getZonaRef()->getTipoZona() == "fav" && getDealState()){
+
+            bool TrueFalse = (rand() % 100) < 30;
             getZonaRef()->addEletrc(getProductSize());
+            addEletrProd(getProductSize());
+
+            if(TrueFalse) {
+
+                cout << "Foi apanhado pelas Autoridades." << endl;
+                exit(-1);
+
+            } else {
+
+                int f = (rand() % 500) + 1;
+                getZonaRef()->addMoney(f);
+                cout << f << " euros, foram enviados pela Mafia." << endl;
+
+            }
+        } else {
+
+            getZonaRef()->addEletrc(getProductSize());
+            addEletrProd(getProductSize());
+
         }
     } else if(!getZonaRef()->haveOper()) {
         cout << "A Barragem na zona " << getZonaRef()->getTipoZona() << " ,nao tem um Operario presente." << endl;
