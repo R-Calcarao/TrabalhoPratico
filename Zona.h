@@ -55,7 +55,6 @@ public:
 
     void addTrabalhador(const string &t, const int dia);
 
-
     int workerCost(const string t){ //Recebe o tipo de Trabalhador contratado e dá return do preço do mesmo
                                     //que será descontado no dinheiro do Player
         if(t=="miner"){
@@ -291,13 +290,21 @@ public:
         return false;
     }
 
-    int getMadeira()const;
+    float getMadeira()const;
 
     int getVigas() const;
 
+    float getBarraAco() const;
+
+    void withrawAco(const float cost);
+
     void addMadeira(const float add);
 
-    int getMoney()const;
+    float getMoney()const;
+
+
+
+    void addMoney(const float add)const;
 
     void withdrawMoney(const float cost);
 
@@ -313,13 +320,15 @@ public:
 
     void withdrawCarvao(const float cost);
 
-    int getFerro()const;
+    float getFerro()const;
 
     void addFerro(const float add);
 
     void withdrawFerro(const float cost);
 
-    int getCarvao()const;
+    float getCarvao()const;
+
+    float getEletr() const;
 
     void addCarvao(const float add);
 
@@ -334,6 +343,5 @@ public:
     bool HavebarragemAround();
 
 };
-
 
 #endif //PRATICOTRABALHO_ZONA_H
