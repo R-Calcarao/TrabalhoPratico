@@ -38,16 +38,28 @@ void Zona::addTrabalhador(const string &t,const int dia) { //Recebe tipo e quant
     }
 }
 
-int Zona::getMadeira() const{
+float Zona::getMadeira() const{
     return recursos->getMadeira();
 }
 
-int Zona::getMoney() const{
+float Zona::getMoney() const{
     return recursos->getMoney();
+}
+
+void Zona::addMoney(const float add) const {
+    recursos->addMoney(add);
 }
 
 int Zona::getVigas() const {
     return recursos->getVigaMadeira();
+}
+
+float Zona::getBarraAco() const {
+    return recursos->getBarraAco();
+}
+
+void Zona::withrawAco(const float cost) {
+    recursos->withdrawAco(cost);
 }
 
 void Zona::withdrawMoney(const float cost) {
@@ -78,12 +90,16 @@ void Zona::addViga(const int add) {
     recursos->addViga(add);
 }
 
-int Zona::getFerro() const{
+float Zona::getFerro() const{
     return recursos->getFerro();
 }
 
-int Zona::getCarvao() const {
+float Zona::getCarvao() const {
     return recursos->getCarvao();
+}
+
+float Zona::getEletr() const {
+    return recursos->getEletricidade();
 }
 
 void Zona::addFerro(const float add) {
@@ -180,7 +196,7 @@ void Zona::addEdificio(const string &t) {
             } else if(recursos->getMadeira() < 5){
                 cout << "Nao tem madeira suficiente." << endl;
             } else {
-                cout << "So pode construir Serracao em zonas de Floresta." << endl;
+                cout << "So pode construir Serracao em zonas do tipo Floresta." << endl;
             }
         } else if (t == "mnC" && getTipoZona()=="mnt") {
                 if(recursos->getVigaMadeira() >= 20) {
@@ -189,7 +205,7 @@ void Zona::addEdificio(const string &t) {
                     cout << "Mina de Carvao construida em " << getTipoZona() << endl;
                     N_edificios++;
                 } else { //Se n houver vigas suficientes
-                    int rest = 20 - recursos->getVigaMadeira();
+                    float rest = 20 - recursos->getVigaMadeira();
                     cout << "Nao tem vigas de madeira suficientes, faltam-lhe " << rest << " vigas." << endl;
                     rest = rest*20;
                     cout << "O restante custa: " << rest << " euros" << endl;
@@ -215,7 +231,7 @@ void Zona::addEdificio(const string &t) {
                 cout << "Mina de Carvao construida em " << getTipoZona() << endl;
                 N_edificios++;
             } else { //Se n houver vigas suficientes
-                int rest = 10 - recursos->getVigaMadeira();
+                float rest = 10 - recursos->getVigaMadeira();
                 cout << "Nao tem vigas de madeira suficientes, faltam-lhe " << rest << " vigas." << endl;
                 rest = rest*10;
                 cout << "O restante custa: " << rest << " euros" << endl;
@@ -241,7 +257,7 @@ void Zona::addEdificio(const string &t) {
                 cout << "Mina de Ferro construida em " << getTipoZona() << endl;
                 N_edificios++;
             } else {// Se n houver vigas sufientes
-                int rest = 20 - recursos->getVigaMadeira();
+                float rest = 20 - recursos->getVigaMadeira();
                 cout << "Nao tem vigas de madeira suficientes, faltam-lhe " << rest << " vigas." << endl;
                 rest = rest*20;
                 cout << "O restante custa: " << rest << " euros" << endl;
@@ -267,7 +283,7 @@ void Zona::addEdificio(const string &t) {
                 cout << "Mina de Ferro construida em " << getTipoZona() << endl;
                 N_edificios++;
             } else {// Se n houver vigas sufientes
-                int rest = 10 - recursos->getVigaMadeira();
+                float rest = 10 - recursos->getVigaMadeira();
                 cout << "Nao tem vigas de madeira suficientes, faltam-lhe " << rest << " vigas." << endl;
                 rest = rest*10;
                 cout << "O restante custa: " << rest << " euros" << endl;
