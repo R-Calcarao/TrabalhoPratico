@@ -53,3 +53,23 @@ bool Bateria::capMaxReach(const string type) {
     }
     return false;
 }
+
+bool Bateria::capMaxReach(const string type) {
+    if(eletrProd >= getCapMax()){
+        cout << "A Bateria na Zona " << getZonaRef()->getTipoZona() << " atingiu a capacidade maxima de eletricidade." << endl;
+        while(eletrProd > getCapMax()) {
+            removeEletrProd(1);
+            getZonaRef()->withdrawEletr(1);
+        }
+        return true;
+    } else {
+        if(type == "elec") {
+            addEletrProd(1);
+            return false;
+        } else if(type == "barg"){
+            addEletrProd(3);
+            return false;
+        }
+    }
+    return false;
+}
