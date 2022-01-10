@@ -12,6 +12,8 @@ class Barragem : public Edificio{
     float ProbCollap = 5;
     bool fuctional = true;
     float productSize=3;
+    float eletrProd=0;
+    bool deal = false;
 public:
     Barragem(int day) : Edificio("barg",35,0/*de Carvao*/,day){}
 
@@ -25,6 +27,22 @@ public:
         return fuctional;
     }
 
+    float getEletrProd() const{
+        return eletrProd;
+    }
+
+    bool getDealState() const {
+        return deal;
+    }
+
+    void addEletrProd(const float add) {
+        eletrProd = eletrProd + add;
+    }
+
+    void removeEletrProd(const float cost) {
+        eletrProd = eletrProd - cost;
+    }
+
     float getProductSize() const{
         return productSize;
     }
@@ -32,6 +50,11 @@ public:
     void addProductSize(){
         productSize++;
     }
+
+};
+
+
+#endif //PRATICOTRABALHO_BARRAGEM_H
 
 };
 
